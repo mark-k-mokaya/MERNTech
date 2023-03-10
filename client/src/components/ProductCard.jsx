@@ -84,7 +84,7 @@ const ProductCard = ({product}) => {
       <Flex mt={1} justifyContent="space-between" alignContent="center">
         <Link
           as={ReactLink}
-          to={`/products/${product.id}`}
+          to={`/products/${product._id}`}
           pt={2}
           cursor="pointer">
           <Box fontSize="2xl" fontWeight="semibold" lineHeight="tight">
