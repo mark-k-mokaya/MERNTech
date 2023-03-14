@@ -12,31 +12,77 @@ import {
   Link,
   HStack,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import {BiShoppingBag} from "react-icons/bi";
 import {Link as ReactLink} from "react-router-dom";
 import {StarIcon} from "@chakra-ui/icons";
 import {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {addToCart} from "../redux/actions/cartActions";
+import {cartSelector} from "../redux/slices/cart";
 
 const Rating = ({rating, numberOfReviews}) => {
   const {iconSize, setIconSize} = useState("14px");
   return (
     <Flex>
       <HStack spacing="2px">
-        <StarIcon size={iconSize} w="14px" color="orange.500"/>
-        <StarIcon size={iconSize} w="14px" color={rating >=2 ? "orange.500" : "gray.200" }/>
-        <StarIcon size={iconSize} w="14px" color={rating >=3 ? "orange.500" : "gray.200" }/>
-        <StarIcon size={iconSize} w="14px" color={rating >=4 ? "orange.500" : "gray.200" }/>
-        <StarIcon size={iconSize} w="14px" color={rating >=5 ? "orange.500" : "gray.200" }/>
+        <StarIcon size={iconSize} w="14px" color="orange.500" />
+        <StarIcon
+          size={iconSize}
+          w="14px"
+          color={rating >= 2 ? "orange.500" : "gray.200"}
+        />
+        <StarIcon
+          size={iconSize}
+          w="14px"
+          color={rating >= 3 ? "orange.500" : "gray.200"}
+        />
+        <StarIcon
+          size={iconSize}
+          w="14px"
+          color={rating >= 4 ? "orange.500" : "gray.200"}
+        />
+        <StarIcon
+          size={iconSize}
+          w="14px"
+          color={rating >= 5 ? "orange.500" : "gray.200"}
+        />
       </HStack>
       <Text fontSize="md" fontWeight="bold" ml="4px">
-        {`${numberOfReviews} ${numberOfReviews == 1? "Review" : "Reviews"}`}
+        {`${numberOfReviews} ${numberOfReviews == 1 ? "Review" : "Reviews"}`}
       </Text>
     </Flex>
   );
-}
+};
 
 const ProductCard = ({product}) => {
+  const dispatch = useDispatch();
+  const toast = useToast();
+
+  const cartInfo = useSelector(cartSelector);
+  const {cart} = cartInfo;
+
+  console.log(cart);
+
+  const addItem = (id) => {
+    if (cart.some((cartItem) => cartItem.id === id)) {
+      toast({
+        description:
+          "This item is already in your cart.Go to cart to change the quantity.",
+        status: "error",
+        isClosable: true,
+      });
+    } else {
+      dispatch(addToCart(id, 1));
+      toast({
+        description: "Item has been added to cart.",
+        status: "success",
+        isClosable: true,
+      });
+    }
+  };
+
   return (
     <Stack
       p="2"
@@ -93,7 +139,10 @@ const ProductCard = ({product}) => {
         </Link>
       </Flex>
       <Flex justifyContent="space-between" alignContent="center" py={2}>
-          <Rating rating={product.rating} numberOfReviews={product.numberOfReviews} />
+        <Rating
+          rating={product.rating}
+          numberOfReviews={product.numberOfReviews}
+        />
       </Flex>
       <Flex justify="space-between">
         <Box fontSize="2xl" color={useColorModeValue("gray.800", "white")}>
@@ -111,9 +160,10 @@ const ProductCard = ({product}) => {
           <Button
             variant="ghost"
             display="flex"
-            disabled={product.stock <= 0}>
-              <Icon as={BiShoppingBag} h={7} w={7} alignSelf="center"/>
-            </Button>
+            disabled={product.stock <= 0}
+            onClick={product.stock > 0 && (() => addItem(product._id))}>
+            <Icon as={BiShoppingBag} h={7} w={7} alignSelf="center" />
+          </Button>
         </Tooltip>
       </Flex>
     </Stack>

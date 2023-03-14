@@ -14,10 +14,11 @@ import ProductCard from "../components/ProductCard";
 import {useDispatch, useSelector} from "react-redux";
 import {getProducts} from "../redux/actions/productActions";
 import {useEffect} from "react";
+import {productsSelector} from "../redux/slices/products";
 
 const ProductsScreen = () => {
   const dispatch = useDispatch();
-  const productsList = useSelector((state) => state.products);
+  const productsList = useSelector(productsSelector);
   const {loading, error, products} = productsList;
 
   useEffect(() => {
