@@ -1,9 +1,10 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 export const initialState = {
-  loading: false, // add spinner
+  loading: false,
   error: null,
-  products: []
+  products: [],
+  product: null,
 };
 
 export const productsSlice = createSlice({
@@ -12,21 +13,27 @@ export const productsSlice = createSlice({
   reducers: {
     setLoading: (state) => {
       state.loading = true;
-    }, 
+    },
     setProducts: (state, {payload}) => {
       state.loading = false;
       state.error = null;
       state.products = payload;
-    }, 
+    },
+    setProduct: (state, {payload}) => {
+      state.loading = false;
+      state.error = null;
+      state.product = payload;
+    },
     setError: (state, {payload}) => {
       state.loading = false;
       state.error = payload;
-    }
-  }
+    },
+  },
 });
 
-export const {setLoading, setProducts, setError} = productsSlice.actions;
+export const {setLoading, setProducts, setProduct, setError} = productsSlice.actions;
 
 export default productsSlice.reducer;
 
 export const productsSelector = (state) => state.products;
+

@@ -2,9 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 
 const calculateSubtotal = (cart) => {
   let result = 0;
-  cart.map(item => {
-    result += item.qty * item.price
-  }); 
+  cart.map(item => result += item.qty * item.price); 
   return Number(result).toFixed(2); 
 }
 

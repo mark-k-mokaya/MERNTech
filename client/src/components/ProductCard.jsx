@@ -69,7 +69,7 @@ const ProductCard = ({product}) => {
     if (cart.some((cartItem) => cartItem.id === id)) {
       toast({
         description:
-          "This item is already in your cart.Go to cart to change the quantity.",
+          "This item is already in your cart. Go to cart to change the quantity.",
         status: "error",
         isClosable: true,
       });
@@ -160,8 +160,8 @@ const ProductCard = ({product}) => {
           <Button
             variant="ghost"
             display="flex"
-            disabled={product.stock <= 0}
-            onClick={product.stock > 0 && (() => addItem(product._id))}>
+            isDisabled={product.stock <= 0}
+            onClick={() => addItem(product._id)}>
             <Icon as={BiShoppingBag} h={7} w={7} alignSelf="center" />
           </Button>
         </Tooltip>
