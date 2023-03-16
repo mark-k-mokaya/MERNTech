@@ -15,6 +15,7 @@ import {
 import {Link as ReactLink} from "react-router-dom";
 import {HamburgerIcon, CloseIcon, MoonIcon, SunIcon} from "@chakra-ui/icons";
 import {BiMicrochip} from "react-icons/bi";
+import {useState} from "react";
 
 const links = [
   {linkName: "Products", path: "/products"},
@@ -36,9 +37,10 @@ const NavLink = ({path, children}) => (
   </Link>
 );
 
-export const Navbar = () => {
+const Navbar = () => {
   const {isOpen, onClose, onOpen} = useDisclosure();
   const {colorMode, toggleColorMode} = useColorMode();
+  const [isHovering, setIsHovering] = useState(false);
   return (
     <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
       <Flex h={16} alignItems="center" justifyContent="space-between">
@@ -50,9 +52,20 @@ export const Navbar = () => {
         />
 
         <HStack>
-          <Link as={ReactLink} to="/">
+          <Link
+            as={ReactLink}
+            to="/"
+            style={{textDecoration: "none"}}
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}>
             <Flex alignItems="center">
-              <Icon as={BiMicrochip} h={6} w={6} color={"orange.400"} />
+              <Icon
+                as={BiMicrochip}
+                h={6}
+                w={6}
+                color={isHovering ? "cyan.400" : "orange.400"}
+              />
+
               <Text fontWeight="extrabold">MERN Tech</Text>
             </Flex>
           </Link>
