@@ -32,7 +32,7 @@ const LandingScreen = () => (
           base: useColorModeValue("orange.50", "gray.700"),
           lg: "transparent",
         }}
-        mx={{base: "6", md: "8", lg: "0"}}
+        mx={{base: "6", md: "8", lg: "0"}}  
         px={{base: "6", md: "8", lg: "0"}}
         py={{base: "6", md: "8", lg: "12"}}>
         <Stack spacing={{base: "8", lg: "10"}}>
@@ -49,7 +49,7 @@ const LandingScreen = () => (
               </Text>
             </Flex>
 
-            <Heading size="xl" fontW eight="normal">
+            <Heading size="xl" fontWeight="normal">
               Refresh your Tech Setup
             </Heading>
           </Stack>
