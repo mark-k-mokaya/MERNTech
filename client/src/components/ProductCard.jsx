@@ -63,8 +63,6 @@ const ProductCard = ({product}) => {
   const cartInfo = useSelector(cartSelector);
   const {cart} = cartInfo;
 
-  console.log(cart);
-
   const addItem = (id) => {
     if (cart.some((cartItem) => cartItem.id === id)) {
       toast({
