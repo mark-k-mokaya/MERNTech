@@ -33,14 +33,21 @@ export const userSlice = createSlice({
 			state.userInfo = payload;
 			state.updateSuccess = true;
 			state.error = null;
-    },
-    resetUpdate: (state) => {
+		},
+		resetUpdate: (state) => {
 			state.updateSuccess = false;
-    }
+		},
 	},
 });
 
-export const {setLoading, setError, userLogin, userLogout, updateUserProfile, resetUpdate} = userSlice.actions;
+export const {
+	setLoading,
+	setError,
+	userLogin,
+	userLogout,
+	updateUserProfile,
+	resetUpdate,
+} = userSlice.actions;
 
 export default userSlice.reducer;
 

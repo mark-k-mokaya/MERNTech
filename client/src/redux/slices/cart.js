@@ -15,7 +15,7 @@ const initialState = {
   loading: false,
   error: null,
   cart: JSON.parse(localStorage.getItem('cartItems')) ?? [],
-  expressShipping: false,
+  expressShipping: JSON.parse(localStorage.getItem('expressShipping')) ?? false,
   subtotal: localStorage.getItem('cartItems') ? calculateSubtotal(JSON.parse(localStorage.getItem('cartItems'))) : 0,
 };
 
@@ -51,11 +51,19 @@ export const cartSlice = createSlice({
       state.subtotal = calculateSubtotal(state.cart);
       state.loading = false;
       state.error = null;
+    },
+    setExpressShipping: (state, {payload}) => {
+      state.expressShipping = payload;
+      localStorage.setItem('expressShipping', payload);
+    }, 
+    clearCart: (state) => {
+      localStorage.removeItem("cartItems");
+      state.cart = [];
     }
   },
 });
 
-export const {setLoading, addCartItem, setError, removeCartItem} = cartSlice.actions;
+export const {setLoading, addCartItem, setError, removeCartItem, setExpressShipping, clearCart} = cartSlice.actions;
 
 export default cartSlice.reducer;
 
