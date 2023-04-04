@@ -11,6 +11,7 @@ import LoginScreen from "./screens/LoginScreen";
 import RegistrationScreen from "./screens/RegistrationScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import CheckoutScreen from "./screens/CheckoutScreen";
+import UserOrdersScreen from "./screens/UserOrdersScreen";
 
 function App() {
 	return (
@@ -27,6 +28,7 @@ function App() {
 						<Route path="/signup" element={<RegistrationScreen />} />
 						<Route path="/profile" element={<ProfileScreen />} />
 						<Route path="/checkout" element={<CheckoutScreen />} />
+						<Route path="/orders" element={<UserOrdersScreen />} />
 					</Routes>
 				</main>
 				<Footer />
