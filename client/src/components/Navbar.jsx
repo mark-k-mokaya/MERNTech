@@ -27,7 +27,11 @@ import {
 	ChevronDownIcon,
 } from "@chakra-ui/icons";
 import {CgProfile} from "react-icons/cg";
-import {MdLocalShipping, MdLogout} from "react-icons/md";
+import {
+	MdLocalShipping,
+	MdLogout,
+	MdOutlineAdminPanelSettings,
+} from "react-icons/md";
 import {BiMicrochip} from "react-icons/bi";
 import {FiShoppingCart} from "react-icons/fi";
 import {useState} from "react";
@@ -42,7 +46,7 @@ const ShoppingCartIcon = () => {
 	return (
 		<Flex>
 			Cart
-			<Icon as={FiShoppingCart} h="4" w="7" alignSelf="center"/>
+			<Icon as={FiShoppingCart} h="4" w="7" alignSelf="center" />
 			<Text as="sub" fontSize="xs" ml="-1">
 				{cart.length}
 			</Text>
@@ -148,6 +152,15 @@ const Navbar = () => {
 									<MdLocalShipping />
 									<Text ml="2">Orders</Text>
 								</MenuItem>
+								{userInfo.isAdmin === true && (
+									<>
+										<MenuDivider />
+										<MenuItem as={ReactLink} to="/admin-console">
+											<MdOutlineAdminPanelSettings />
+											<Text ml="2">Admin Console</Text>
+										</MenuItem>
+									</>
+								)}
 								<MenuDivider />
 								<MenuItem onClick={logoutHandler}>
 									<MdLogout />

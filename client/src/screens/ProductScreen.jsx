@@ -41,7 +41,6 @@ const ProductScreen = () => {
 	const [rating, setRating] = useState(1);
 	const [title, setTitle] = useState("");
 	const [reviewBoxOpen, setReviewBoxOpen] = useState(false);
-	const [hasReviewed, setHasReviewed] = useState(false);
 
 	// Track Product Details
 	const [amount, setAmount] = useState(1);
@@ -60,13 +59,6 @@ const ProductScreen = () => {
 	//Fetch User Details
 	const user = useSelector(userSelector);
 	const {userInfo} = user;
-
-	useEffect(() => async ()=>{
-		let res = await product.reviews.every((item) => item.user !== userInfo._id);
-		console.log(res);
-	},
-		[]
-	);
 
 	useEffect(() => {
 		dispatch(getProduct(id));
@@ -100,14 +92,16 @@ const ProductScreen = () => {
 		});
 	};
 
-	const hasUserReviewed = () =>
-		product.reviews.some((item) => item.user === userInfo._id);
-
 	const onSubmit = () => {
 		dispatch(
 			createProductReview(product._id, userInfo._id, comment, rating, title)
 		);
 	};
+	
+	const hasUserReviewed = () =>
+		product && product.reviews
+			? product.reviews.some((item) => item.user === userInfo._id)
+			: false;
 
 	return (
 		<Wrap spacing="30px" justify="center" minH="100vh">
