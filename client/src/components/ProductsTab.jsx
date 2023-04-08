@@ -81,11 +81,10 @@ const ProductsTab = () => {
 							<h2>
 								<AccordionButton>
 									<Box flex="1" textAlign="right">
-											<Box justifyContent="center">
+										<Box justifyContent="center">
 											<Text mr="8px" fontWeight="bold">
-												 Add New Product <AccordionIcon/>
-												</Text>
-												 
+												Add New Product <AccordionIcon />
+											</Text>
 										</Box>
 									</Box>
 								</AccordionButton>

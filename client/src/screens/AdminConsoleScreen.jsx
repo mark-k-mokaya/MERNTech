@@ -14,7 +14,8 @@ import {userSelector} from "../redux/slices/user";
 
 import UsersTab from "../components/UsersTab";
 import OrdersTab from "../components/OrdersTab";
-import ProductsTab from "../components/ProductTab";
+import ProductsTab from "../components/ProductsTab";
+import ReviewsTab from "../components/ReviewsTab";
 
 const AdminConsoleScreen = () => {
 	const user = useSelector(userSelector);
@@ -34,21 +35,24 @@ const AdminConsoleScreen = () => {
 					</Heading>
 					<Tabs size="md" variant="enclosed">
 						<TabList>
-							<Tab>Users</Tab>
-							<Tab>Products</Tab>
-							{/* <Tab>Reviews</Tab> */}
-							<Tab>Orders</Tab>
+							{/* <Tab>Users</Tab> */}
+							{/* <Tab>Products</Tab> */}
+							<Tab>Reviews</Tab>
+							{/* <Tab>Orders</Tab> */}
 						</TabList>
 						<TabPanels>
-							<TabPanel>
+							{/* <TabPanel>
 								<UsersTab/>
-							</TabPanel>
-							<TabPanel>
+							</TabPanel> */}
+							{/* <TabPanel>
 								<ProductsTab/>
-							</TabPanel>
+							</TabPanel> */}
 							<TabPanel>
-								<OrdersTab/>
+								<ReviewsTab/>
 							</TabPanel>
+							{/* <TabPanel>
+								<OrdersTab/>
+							</TabPanel> */}
 						</TabPanels>
 					</Tabs>
 				</Stack>

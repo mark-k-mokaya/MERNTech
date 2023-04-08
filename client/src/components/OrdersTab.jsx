@@ -145,9 +145,7 @@ const OrdersTab = () => {
 												<Flex direction="column">
 													<Button
 														variant="outline"
-														onClick={() => {
-															openDeleteConfirmBox(order);
-														}}>
+														onClick={() => openDeleteConfirmBox(order)}>
 														<DeleteIcon mr="5px" /> Remove Order
 													</Button>
 													{!order.isDelivered && (
