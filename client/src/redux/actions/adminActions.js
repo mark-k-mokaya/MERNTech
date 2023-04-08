@@ -1,6 +1,19 @@
 import axios from "axios";
-import {getUsers, userDelete, setError, resetError, setLoading, orderDelete, getOrders, setDeliveredFlag} from "../slices/admin";
-import { setProducts, setProductUpdateFlag, setReviewRemovalFlag } from "../slices/products";
+import {
+	getUsers,
+	userDelete,
+	setError,
+	resetError,
+	setLoading,
+	orderDelete,
+	getOrders,
+	setDeliveredFlag,
+} from "../slices/admin";
+import {
+	setProducts,
+	setProductUpdateFlag,
+	setReviewRemovalFlag,
+} from "../slices/products";
 
 export const getAllUsers = () => async (dispatch, getState) => {
 	const {
@@ -20,8 +33,8 @@ export const getAllUsers = () => async (dispatch, getState) => {
 	} catch (error) {
 		dispatch(
 			setError(
-				error.response && error.response.data.message
-					? error.response.data.message
+				error.response && error.response.data
+					? error.response.data
 					: error.message
 					? error.message
 					: "Users could not be fetched."
@@ -48,8 +61,8 @@ export const deleteUser = (id) => async (dispatch, getState) => {
 	} catch (error) {
 		dispatch(
 			setError(
-				error.response && error.response.data.message
-					? error.response.data.message
+				error.response && error.response.data
+					? error.response.data
 					: error.message
 					? error.message
 					: "User could not be removed."
@@ -77,8 +90,8 @@ export const getAllOrders = () => async (dispatch, getState) => {
 	} catch (error) {
 		dispatch(
 			setError(
-				error.response && error.response.data.message
-					? error.response.data.message
+				error.response && error.response.data
+					? error.response.data
 					: error.message
 					? error.message
 					: "Orders could not be fetched."
@@ -105,8 +118,8 @@ export const deleteOrder = (id) => async (dispatch, getState) => {
 	} catch (error) {
 		dispatch(
 			setError(
-				error.response && error.response.data.message
-					? error.response.data.message
+				error.response && error.response.data
+					? error.response.data
 					: error.message
 					? error.message
 					: "Order could not be removed."
@@ -117,7 +130,7 @@ export const deleteOrder = (id) => async (dispatch, getState) => {
 
 export const setDelivered = (id) => async (dispatch, getState) => {
 	dispatch(setLoading());
-	
+
 	const {
 		user: {userInfo},
 	} = getState();
@@ -135,8 +148,8 @@ export const setDelivered = (id) => async (dispatch, getState) => {
 	} catch (error) {
 		dispatch(
 			setError(
-				error.response && error.response.data.message
-					? error.response.data.message
+				error.response && error.response.data
+					? error.response.data
 					: error.message
 					? error.message
 					: "Order could not be updated."
@@ -147,8 +160,7 @@ export const setDelivered = (id) => async (dispatch, getState) => {
 
 export const resetErrorAndRemoval = () => async (dispatch) => {
 	dispatch(resetError());
-}
-
+};
 
 // Create Product
 export const uploadProduct = (newProduct) => async (dispatch, getState) => {
@@ -164,14 +176,14 @@ export const uploadProduct = (newProduct) => async (dispatch, getState) => {
 			},
 		};
 
-		const {data} = await axios.post(`/api/products`, newProduct,  config);
+		const {data} = await axios.post(`/api/products`, newProduct, config);
 		dispatch(setProducts(data));
 		dispatch(setProductUpdateFlag());
 	} catch (error) {
 		dispatch(
 			setError(
-				error.response && error.response.data.message
-					? error.response.data.message
+				error.response && error.response.data
+					? error.response.data
 					: error.message
 					? error.message
 					: "Product could not be uploaded."
@@ -182,34 +194,50 @@ export const uploadProduct = (newProduct) => async (dispatch, getState) => {
 
 // Update Product
 
-export const updateProduct = (brand, name, category, stock, price, id, productIsNew, description, image) => async (dispatch, getState) => {
-	const {
-		user: {userInfo},
-	} = getState();
+export const updateProduct =
+	(brand, name, category, stock, price, id, productIsNew, description, image) =>
+	async (dispatch, getState) => {
+		const {
+			user: {userInfo},
+		} = getState();
 
-	try {
-		const config = {
-			headers: {
-				Authorization: `Bearer ${userInfo.token}`,
-				"Content-Type": "application/json",
-			},
-		};
+		try {
+			const config = {
+				headers: {
+					Authorization: `Bearer ${userInfo.token}`,
+					"Content-Type": "application/json",
+				},
+			};
 
-		const {data} = await axios.put(`/api/products`, {brand, name, category, stock, price, id, productIsNew, description, image},  config);
-		dispatch(setProducts(data));
-		dispatch(setProductUpdateFlag());
-	} catch (error) {
-		dispatch(
-			setError(
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.message
-					? error.message
-					: "Product could not be updated."
-			)
-		);
-	}
-};
+			const {data} = await axios.put(
+				`/api/products`,
+				{
+					brand,
+					name,
+					category,
+					stock,
+					price,
+					id,
+					productIsNew,
+					description,
+					image,
+				},
+				config
+			);
+			dispatch(setProducts(data));
+			dispatch(setProductUpdateFlag());
+		} catch (error) {
+			dispatch(
+				setError(
+					error.response && error.response.data
+						? error.response.data
+						: error.message
+						? error.message
+						: "Product could not be updated."
+				)
+			);
+		}
+	};
 
 // Delete Product
 export const deleteProduct = (id) => async (dispatch, getState) => {
@@ -225,15 +253,15 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
 			},
 		};
 
-		const {data} = await axios.delete(`/api/products/${id}`,  config);
+		const {data} = await axios.delete(`/api/products/${id}`, config);
 		dispatch(setProducts(data));
 		dispatch(setProductUpdateFlag());
 		dispatch(resetError());
 	} catch (error) {
 		dispatch(
 			setError(
-				error.response && error.response.data.message
-					? error.response.data.message
+				error.response && error.response.data
+					? error.response.data
 					: error.message
 					? error.message
 					: "Product could not be removed."
@@ -242,31 +270,36 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
 	}
 };
 
-export const removeReview = (productId, reviewId) => async(dispatch, getState) => {
-	const {
-		user: {userInfo},
-	} = getState();
+export const removeReview =
+	(productId, reviewId) => async (dispatch, getState) => {
+		const {
+			user: {userInfo},
+		} = getState();
 
-	try {
-		const config = {
-			headers: {
-				Authorization: `Bearer ${userInfo.token}`,
-				"Content-Type": "application/json",
-			},
-		};
+		try {
+			const config = {
+				headers: {
+					Authorization: `Bearer ${userInfo.token}`,
+					"Content-Type": "application/json",
+				},
+			};
 
-		const {data} = await axios.put(`/api/products/${productId}/${reviewId}`, {}, config);
-		dispatch(setProducts(data));
-		dispatch(setReviewRemovalFlag());
-	} catch (error) {
-		dispatch(
-			setError(
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.message
-					? error.message
-					: "Review could not be removed."
-			)
-		);
-	}
-};
+			const {data} = await axios.put(
+				`/api/products/${productId}/${reviewId}`,
+				{},
+				config
+			);
+			dispatch(setProducts(data));
+			dispatch(setReviewRemovalFlag());
+		} catch (error) {
+			dispatch(
+				setError(
+					error.response && error.response.data
+						? error.response.data
+						: error.message
+						? error.message
+						: "Review could not be removed."
+				)
+			);
+		}
+	};

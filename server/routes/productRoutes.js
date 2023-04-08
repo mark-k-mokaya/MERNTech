@@ -16,8 +16,7 @@ const getProduct = async (req, res) => {
 	if (product) {
 		res.json(product);
 	} else {
-		res.status(404);
-		throw new Error("Product not found.");
+		res.status(404).json("Product not found.");
 	}
 };
 
@@ -33,8 +32,7 @@ const createProductReview = asyncHandler(async (req, res) => {
 		);
 
 		if (alreadyReviewed) {
-			res.status(400);
-			throw new Error("Product already reviewed!");
+			res.status(400).json("Product already reviewed!");
 		}
 
 		const review = {
@@ -51,10 +49,9 @@ const createProductReview = asyncHandler(async (req, res) => {
 			product.reviews.reduce((acc, item) => item.rating + acc, 0) /
 			product.reviews.length;
 		await product.save();
-		res.status(201).json({message: "Review has been saved."});
+		res.status(201).json("Review has been saved.");
 	} else {
-		res.status(404);
-		throw new Error("Product not found");
+		res.status(404).json("Product not found");
 	}
 });
 
@@ -88,8 +85,7 @@ const createNewProduct = asyncHandler(async (req, res) => {
 	if (newProduct) {
 		res.json(products);
 	} else {
-		res.status(404);
-		throw new Error("Product could not be added.");
+		res.status(404).json("Product could not be added.");
 	}
 });
 
@@ -121,8 +117,7 @@ const updateProduct = asyncHandler(async (req, res) => {
 		const updatedProduct = await product.save();
 		res.json(updatedProduct);
 	} else {
-		res.status(404);
-		throw new Error("Product not found.");
+		res.status(404).json("Product not found.");
 	}
 });
 
@@ -132,8 +127,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
 	if (product) {
 		res.json(product);
 	} else {
-		res.status(404);
-		throw new Error("Product not found.");
+		res.status(404).json("Product not found.");
 	}
 });
 
@@ -152,10 +146,9 @@ const removeProductReview = asyncHandler(async (req, res) => {
 		}
 		
 		await product.save();
-		res.status(201).json({message: "Review has been removed,"});
+		res.status(201).json("Review has been removed");
 	} else {
-		res.status(404);
-		throw new Error("Product not found");
+		res.status(404).json("Product not found");
 	}
 });
 
