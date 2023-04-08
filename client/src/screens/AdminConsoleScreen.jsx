@@ -35,24 +35,24 @@ const AdminConsoleScreen = () => {
 					</Heading>
 					<Tabs size="md" variant="enclosed">
 						<TabList>
-							{/* <Tab>Users</Tab> */}
-							{/* <Tab>Products</Tab> */}
+							<Tab>Users</Tab>
+							<Tab>Products</Tab>
 							<Tab>Reviews</Tab>
-							{/* <Tab>Orders</Tab> */}
+							<Tab>Orders</Tab>
 						</TabList>
 						<TabPanels>
-							{/* <TabPanel>
+							<TabPanel>
 								<UsersTab/>
-							</TabPanel> */}
-							{/* <TabPanel>
+							</TabPanel>
+							<TabPanel>
 								<ProductsTab/>
-							</TabPanel> */}
+							</TabPanel>
 							<TabPanel>
 								<ReviewsTab/>
 							</TabPanel>
-							{/* <TabPanel>
+							<TabPanel>
 								<OrdersTab/>
-							</TabPanel> */}
+							</TabPanel>
 						</TabPanels>
 					</Tabs>
 				</Stack>
