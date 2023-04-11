@@ -27,7 +27,7 @@ export const getProducts = () => async (dispatch) => {
 };
 
 export const getProduct = (id) => async (dispatch) => {
-	dispatch(setLoading);
+	dispatch(setLoading());
 	try {
 		const {data} = await axios.get(`/api/products/${id}`);
 		dispatch(setProduct(data));
@@ -46,7 +46,7 @@ export const getProduct = (id) => async (dispatch) => {
 
 export const createProductReview =
 	(productId, userId, comment, rating, title) => async (dispatch, getState) => {
-		dispatch(setLoading);
+		dispatch(setLoading());
 
 		const {
 			user: {userInfo},
@@ -81,5 +81,5 @@ export const createProductReview =
 	};
 
 export const resetProductError = () => async (dispatch) => {
-	dispatch(resetError);
+	dispatch(resetError());
 };

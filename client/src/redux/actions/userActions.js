@@ -10,7 +10,7 @@ import {
 } from "../slices/user";
 
 export const login = (email, password) => async (dispatch) => {
-	dispatch(setLoading);
+	dispatch(setLoading());
 	try {
 		const config = {
 			headers: {
@@ -43,7 +43,7 @@ export const logout = () => (dispatch) => {
 };
 
 export const register = (name, email, password) => async (dispatch) => {
-	dispatch(setLoading);
+	dispatch(setLoading());
 	try {
 		const config = {
 			headers: {
